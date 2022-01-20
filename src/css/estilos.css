@@ -1,0 +1,13 @@
+#cabecera {
+    
+    background-color:orange;
+    height: 12.5%;
+    font-family: 'Acme', sans-serif;
+    color: wheat;
+}
+
+.img {
+
+    width:104;
+    height:90;
+}
