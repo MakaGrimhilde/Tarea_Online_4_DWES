@@ -1,6 +1,6 @@
 <?php
 
-class Modelo {
+class modelo {
 
     private $conexion;
     private $host = "localhost";
