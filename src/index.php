@@ -14,7 +14,7 @@ if ($_GET && isset($_GET["accion"])){
      if (method_exists($controlador, $accion)){
 
         //se comprueba si el método tiene como parámetro el id del usuario
-        if($accion = "actualizar" || $accion = "eliminar"){
+        /*if($accion = "actualizar" || $accion = "eliminar"){
 
             if (isset($_GET['id']) && (is_numeric($_GET['id']))){
 
@@ -26,7 +26,9 @@ if ($_GET && isset($_GET["accion"])){
                 $controlador->$accion();
             }
 
-        } 
+        } */
+
+        $controlador->$accion();
 
      } else { //si el método no existe en el Controlador
             
