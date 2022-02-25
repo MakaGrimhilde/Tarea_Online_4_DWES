@@ -98,6 +98,98 @@ class modelo {
         return $resultado;
     }
 
+    public function eliminar($id){
+
+        $resultado = ["correcto" => FALSE, "error" => NULL];
+
+        if ($id and is_numeric($id)){ //si existe un id y es numérico
+
+            try{
+
+                //instrucción sql para eliminar registros de la tabla de la base de datos
+                $sql = "DELETE FROM usuarios WHERE id = :id;";
+                $query = $this->conexion->prepare($sql);
+                $query->execute(['id' => $id]);
+        
+                if ($query){
+                    
+                   $resultado["correcto"] = TRUE;
+        
+                }
+        
+            } catch (PDOException $ex){
+        
+                $resultado["error"] = $ex->getMessage();
+            }
+        
+        } else {
+
+            $resultado["correcto"] = FALSE;
+        }
+
+        return $resultado;
+    }
+
+    public function actualizar($datos){
+
+        $resultado = ["correcto" => FALSE, "error" => NULL];
+
+        try{
+
+            $this->conexion->beginTransaction();
+
+            $sql = "UPDATE usuarios SET nombre = :nombre, apellidos = :apellidos, email = :email, imagen = :imagen WHERE id= :id;";
+            $query = $this->conexion->prepare($sql);
+            $query->execute(['id' => $datos["id"], 'nombre' => $datos["nombre"], 'apellidos' => $datos["apellidos"],
+             'email' => $datos["email"], 'imagen' => $datos["imagen"]]);
+
+            if ($query){
+
+                $this->conexion->commit();
+                $resultado["correcto"] = TRUE;
+            } 
+
+        } catch (PDOException $ex){
+
+            $this->conexion->rollback();
+            $resultado["error"] = $ex->getMessage();
+
+        }
+
+        return $resultado;
+
+    }
+
+    public function listarUsuario($id){
+
+        $resultado = ["correcto" => FALSE, "datos" => NULL, "error" => NULL];
+
+        if ($id && is_numeric($id)){
+
+            try {
+
+                $sql = "SELECT * FROM usuarios WHERE id=:id;";
+                $query = $this->conexion->prepare($sql);
+                $query->execute(['id' => $id]);
+                 
+                if ($query) {
+
+                    $resultado["correcto"] = TRUE;
+                    $resultado["datos"] = $query->fetch(PDO::FETCH_ASSOC);
+
+                }
+
+            } catch (PDOException $ex) {
+
+              $resultado["error"] = $ex->getMessage();
+
+            }
+          }
+      
+        return $resultado;
+
+    }
+
 
 }
 
