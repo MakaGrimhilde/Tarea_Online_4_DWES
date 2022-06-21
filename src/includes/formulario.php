@@ -1,9 +1,10 @@
-<?php require 'includes/recibir.php';?>
+<?php require '../includes/recibir.php';?>
 <div class="row justify-content-center">
     <h2>Login de usuario</h2>
 </div>
 <br/>
 <div class="row justify-content-center">
+
             <!--Comienzo de la estructura del formulario-->    
             <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
                 <div class="row">

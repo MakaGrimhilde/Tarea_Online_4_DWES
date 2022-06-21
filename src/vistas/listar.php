@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <?php require 'includes/head.php';?>
+        <?php require '../includes/head.php';?>
     </head>
     <body>
-        <?php require 'includes/header.php';?>
+        <?php require '../includes/header.php';?>
+        <?php require '../includes/abrirsesion.php';?>
+       
+        <br/><br/>
+        <div class="row justify-content-center">
+            <h2>Lista de usuarios</h2>
+        </div>
         <br/>
         <div class="row justify-content-center">
             <?php foreach ($parametros["mensajes"] as $mensaje) : ?> 
@@ -23,7 +29,7 @@
                         <th>Imagen</th>
                         <th>Operaciones</th>
                     </tr>
-                    <!--bucle foreach que recorre toda la tabla y recoge los elementos que se encuentren en nombre, 
+                    <!--bucle foreach que recorre toda la tabla y recoge los elementos que se encuentren en nick, nombre, 
                     apellidos, email e imagen-->
                     <?php foreach($parametros["datos"] as $re){ { ?> 
 
@@ -34,22 +40,54 @@
                         <td><?=$re["email"]?></td>
                         <td>
                             <?php
-                                if ($re["imagen-avatar"] != null){
+                                if ($re["imagen"] != null){
 
-                                    echo '<img src="fotos/'.$re["imagen-avatar"].'" width="40"/>'.$re["imagen-avatar"];
+                                    echo '<img src="../fotos/'.$re["imagen"].'" width="50"/>';
 
                                 }
                             ?>
                         </td>
-                        <td><a href="index.php?accion=actualizar&id=<?= $re['id'] ?>">Editar</a>&nbsp;&nbsp;
-                        <a href="index.php?accion=eliminar&id=<?= $re['id'] ?>">Eliminar</a>&nbsp;&nbsp;
-                        <!--<a href="./tabladetalle.php?id=<?=$re["id"]?>">Detalle</a>-->
+                        
+                        <td>
+                            
+                        <?php
+
+                            if($_COOKIE["usuario"] == "Mob12" or $_COOKIE["permisos"] == $re["id"]){
+
+                        ?>
+
+                            <a href="../vistas/index.php?accion=actualizar&id=<?= $re['id'] ?>">Editar</a>&nbsp;&nbsp;
+                            <a href="../vistas/index.php?accion=eliminar&id=<?= $re['id'] ?>" 
+                            onclick="return confirm('Está a punto de eliminar este usuario, ¿está seguro?')">Eliminar</a>&nbsp;&nbsp;
+
+
+                        <?php
+
+                            }
+                        ?>
+
+                        <a href="../vistas/index.php?accion=listarUsuario&id=<?=$re["id"]?>">Detalle</a>
                         </td>
                     </tr>
 
                     <?php } } ?>
                 </table>
+                <br/>
+                <?php include '../includes/paginacion.php';?>
             </div>
         </div>
+        <br>
+        <div class="row justify-content-center">
+            <a type="button" class="btn btn-primary" href="../vistas/index.php?accion=vistaPdf">Descargar PDF</a>&nbsp;
+            <a type="button" class="btn btn-primary" href="../vistas/index.php?accion=exportarExcel">Descargar EXCEL</a>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <form class="form-horizontal" action="../vistas/index.php?accion=importarExcel" method="POST" enctype="multipart/form-data">
+                <input type="file" name="excel"/>
+                <button type="submit" name="botonExcel" class="btn btn-primary">Importar Excel</button>
+            </form>
+        </div>
+        <br>
     </body>
 </html>

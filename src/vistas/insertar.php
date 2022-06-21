@@ -1,53 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <?php require 'includes/head.php';?>
+        <?php require '../includes/head.php';?>
     </head>
     <body>
-        <?php require 'includes/header.php';?>
-        <br/>
+        <?php require '../includes/header.php';?>
+        <br/><br/>
+        <?php require '../includes/abrirsesion.php'; ?>
         <div class="row justify-content-center">
             <h2>Nuevo Usuario</h2>
         </div>
-        <br/>
+        <br/><br/>
         <div class="row justify-content-center">
             <?php foreach ($parametros["mensajes"] as $mensaje) : ?> 
-            <div class="alert alert-<?= $mensaje["tipo"] ?>"><?= $mensaje["mensaje"] ?></div>
+                <div class="alert alert-<?= $mensaje["tipo"] ?>"><?= $mensaje["mensaje"] ?></div>
             <?php endforeach; ?>
         </div>
         <br/>
         <div class="row justify-content-center">
                     <!--Comienzo de la estructura del formulario-->    
-                    <form class="form-horizontal" method="POST" action="index.php?accion=insertar" enctype="multipart/form-data">
+                    <form class="form-horizontal" method="POST" action="../vistas/index.php?accion=insertar" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-sm">
                                 <!--cuadro de texto para recoger el nombre-->
                                 <label for="nick">Usuario</label>
                                 <input type="text" class="form-control" id="nick" name="nick"
-                                    
-                                    <?php
-                                        //muestra el nombre de usuario ya guardado en la cookie
-                                        if(isset($_COOKIE["usuario"])){
-                                            echo "value='{$_COOKIE["usuario"]}'";
-                                        }
-
-                                    ?>
-                                    required value="<?= $parametros["datos"]["nick"] ?>"
-                                />  
+                                    required value="<?= $parametros["datos"]["nick"] ?>"/>  
                             </div>
                             <div class="col-sm">
                                 <!--cuadro de texto para recoger la contraseña-->
                                 <label for="password">Contraseña</label>
                                 <input type="password" class="form-control" id="password" name="password"
-
-                                    <?php
-                                        //muestra la contraseña ya guardada en la cookie
-                                        if(isset($_COOKIE["password"])){
-                                            echo "value='{$_COOKIE["password"]}'";
-                                        }
-                                    ?>
-                                    required value="<?= $parametros["datos"]["password"] ?>"  
-                                />  
+                                    required value="<?= $parametros["datos"]["password"] ?>"/>  
                             </div>
                         </div>
                         <br/>
@@ -85,36 +69,6 @@
                             </div>
                         </div>
                         <br/>
-                        <div class="row">
-                            <!--Casillas de verificación para recordar usuario y mantener sesión abierta-->
-                            <div class="col-sm">
-                                <label>
-                                    <input type="checkbox" name="recuerdame">
-                                        Recordar usuario
-                                </label>
-                                &nbsp;&nbsp;
-                                <label>
-                                    <input type="checkbox" name="mantener">
-                                        Mantener sesión
-                                </label>
-                            </div>
-                        </div>
-
-                        <?php
-                            if(isset($_GET['error'])){ //si existen errores en el formulario
-
-                                if ($_GET['error'] == "dato"){ //si es un dato incorrecto
-
-                                    echo '<div class="alert alert-danger row justify-content-center" style="margin-top:5px;">'. 
-                                    "El usuario y/o contraseña son incorrectos, inténtelo de nuevo<br/>".'</div>';
-
-                                } elseif ($_GET['error'] == "fuera"){ //si se intenta acceder directamente a la página sin login
-
-                                    echo '<div class="alert alert-danger row justify-content-center" style="margin-top:5px;">'. 
-                                    "Debe logearse antes para poder acceder a esta página<br/>".'</div>';          
-                                }
-                            }     
-                        ?>
                         
                         <br/>
                         <!--botones para enviar los datos recogidos en el formulario y para limpiar los campos-->

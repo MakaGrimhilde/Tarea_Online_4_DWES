@@ -4,6 +4,18 @@
     height: 12.5%;
     font-family: 'Acme', sans-serif;
     color: wheat;
+    
+}
+
+.row {
+
+    margin: auto;
+
+}
+
+#buscar {
+
+    float: right;
 }
 
 .img {
@@ -19,6 +31,8 @@
     font-weight: bold;
     
 }
+
+
 
 .btn {
 

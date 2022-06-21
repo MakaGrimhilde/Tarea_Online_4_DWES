@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <?php require 'includes/head.php';?>
+        <?php require '../includes/head.php';?>
     </head>
     <body>
-        <?php require 'includes/header.php';?>
+        <?php require '../includes/header.php';?>
+        <br/><br/>
+        <?php require '../includes/abrirsesion.php'; ?>
+        <div class="row justify-content-center">
+            <h2>Editar usuario</h2>
+        </div>
         <br/>
         <div class="row justify-content-center">
             <?php 
                 foreach ($parametros["mensajes"] as $mensaje) : ?> 
                 <div class="alert alert-<?= $mensaje["tipo"] ?>"><?= $mensaje["mensaje"] ?></div>
             <?php endforeach; ?>
-        </div>
+        </div><br/>
         <div class="row justify-content-center">
             <!--Comienzo de la estructura del formulario. Los datos recogidos por el método POST serán recibidos en ejer_26.php-->    
             <form class="form-horizontal" method="POST" action="index.php?accion=actualizar" enctype="multipart/form-data">
@@ -40,7 +45,7 @@
                     <?php 
                     
                     if ($parametros["datos"]["imagen"] != null && $parametros["datos"]["imagen"] != ""){ ?>
-                    <img src="fotos/<?= $parametros["datos"]["imagen"] ?>" width="60"/></br>
+                    <img src="../fotos/<?= $parametros["datos"]["imagen"] ?>" width="60"/></br>
                     <?php } 
                     
                     ?>
