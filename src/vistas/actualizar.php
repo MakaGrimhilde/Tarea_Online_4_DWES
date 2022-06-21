@@ -18,7 +18,7 @@
             <?php endforeach; ?>
         </div><br/>
         <div class="row justify-content-center">
-            <!--Comienzo de la estructura del formulario. Los datos recogidos por el método POST serán recibidos en ejer_26.php-->    
+            <!--Comienzo de la estructura del formulario-->    
             <form class="form-horizontal" method="POST" action="index.php?accion=actualizar" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-sm">
